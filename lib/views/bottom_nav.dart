@@ -3,6 +3,7 @@ import 'package:calculator_app/views/sign_in_screen.dart';
 import 'package:calculator_app/views/sign_up_screen.dart';
 // import 'package:calculator_app/views/calculator_screen.dart';
 import 'package:calculator_app/views/home_screen.dart';
+// ignore: library_prefixes
 import 'package:calculator_app/screens/home_screen.dart' as CalculatorHomeScreen;
 
 
