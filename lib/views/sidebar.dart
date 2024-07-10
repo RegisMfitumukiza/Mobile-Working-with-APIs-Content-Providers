@@ -1,8 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:calculator_app/views/about_us_screen.dart';
-import 'package:calculator_app/views/bottom_nav.dart';
-import 'package:calculator_app/views/help_screen.dart';
-import 'package:calculator_app/views/setting_screen.dart';
+import 'package:authentication_api/views/log_in.dart';
 
 class SideBarScreen extends StatelessWidget {
   const SideBarScreen({super.key});
@@ -78,77 +76,22 @@ class SideBarScreen extends StatelessWidget {
               ...drawerMenuListname.map((sideMenuData) {
                 return ListTile(
                   leading: sideMenuData['leading'],
-                  title: Text(
-                    sideMenuData['title'],
-                  ),
+                  title: Text(sideMenuData['title']),
                   trailing: sideMenuData['trailing'],
-                  onTap: () {
-                    Navigator.pop(context);
-                    
-                    switch (sideMenuData['action_id']) {
-                      case 1:
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const AboutUsScreen(),
-                          ),
+                  onTap: () async {
+                    if (sideMenuData['action_id'] == 4) {
+                      await FirebaseAuth.instance.signOut();
+                      if (context.mounted) {
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (context) => const LoginPage()),
+                          (Route<dynamic> route) => false,
                         );
-                        break;
-                      case 2:
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const HelpScreen(),
-                          ),
-                        );
-                        break;
-                      case 3:
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const SettingScreen(),
-                          ),
-                        );
-                        break;
-                      case 4:
-                        // Handle logout
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: const Text("Logout"),
-                              content: const Text("Are you sure you want to logout?"),
-                              actions: <Widget>[
-                                TextButton(
-                                  child: const Text("Cancel"),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                                TextButton(
-                                  child: const Text("Logout"),
-                                  onPressed: () {
-                                    // Implement logout functionality here
-                                    // For example, clear user data or authentication tokens
-
-                                    // Close the dialog
-                                    Navigator.of(context).pop();
-
-                                    // Navigate to the home page (root of the app)
-                                    Navigator.of(context).pushAndRemoveUntil(
-                                      MaterialPageRoute(
-                                        builder: (context) => const BottomNav(),
-                                      ),
-                                      (Route<dynamic> route) => false,
-                                    );
-                                  },
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                        break;
+                      }
                     }
+                    // Add more actions here if needed
                   },
                 );
-              }),
+              })
             ],
           ),
         ),

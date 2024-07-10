@@ -1,11 +1,9 @@
+import 'package:authentication_api/views/home_screen.dart';
+import 'package:authentication_api/views/log_in.dart';
 import 'package:flutter/material.dart';
-import 'package:calculator_app/views/sign_in_screen.dart';
-import 'package:calculator_app/views/sign_up_screen.dart';
-// import 'package:calculator_app/views/calculator_screen.dart';
-import 'package:calculator_app/views/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 // ignore: library_prefixes
-import 'package:calculator_app/screens/home_screen.dart' as CalculatorHomeScreen;
-
+import 'package:authentication_api/screens/home_screen.dart' as CalculatorHomeScreen;
 
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
@@ -16,17 +14,39 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> {
   int _selectedIndex = 0;
-  static const List<Widget> _widgetOptions = <Widget>[
+
+  // Define the BottomNavigationBar items
+  final List<BottomNavigationBarItem> _navBarItems = const [
+    BottomNavigationBarItem(
+      icon: Icon(Icons.home),
+      label: 'Home',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.calculate),
+      label: 'Calculator',
+    ),
+  ];
+
+  // Define the widget options
+  static final List<Widget> _widgetOptions = <Widget>[
     HomeNavScreen(),
-    SignInScreen(),
-    SignUpScreen(),
-    CalculatorHomeScreen.HomeScreen(),
+    const CalculatorHomeScreen.HomeScreen(),
   ];
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  Future<void> _signOut() async {
+    await FirebaseAuth.instance.signOut();
+    if (mounted) {
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => const LoginPage()),
+        (Route<dynamic> route) => false,
+      );
+    }
   }
 
   @override
@@ -37,28 +57,16 @@ class _BottomNavState extends State<BottomNav> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.login),
-            label: 'Sign In',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_add),
-            label: 'Sign Up',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calculate),
-            label: 'Calculator',
-          ),
-        ],
+        items: _navBarItems,
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _signOut,
+        backgroundColor: Colors.red,  // Sign out when the button is pressed
+        child: const Icon(Icons.exit_to_app),
       ),
     );
   }

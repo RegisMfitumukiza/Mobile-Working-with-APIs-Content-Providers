@@ -1,7 +1,7 @@
-import 'package:calculator_app/constant/colors.dart';
-import 'package:calculator_app/provider/cal_provider.dart';
-import 'package:calculator_app/screens/widgets_data.dart';
-import 'package:calculator_app/widgets/textfield.dart';
+import 'package:authentication_api/constant/colors.dart';
+import 'package:authentication_api/provider/cal_provider.dart';
+import 'package:authentication_api/screens/widgets_data.dart';
+import 'package:authentication_api/widgets/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
