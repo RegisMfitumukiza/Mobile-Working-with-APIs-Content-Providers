@@ -1,6 +1,6 @@
+import 'package:authentication_api/views/login_or_register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:authentication_api/views/log_in.dart';
 
 class SideBarScreen extends StatelessWidget {
   const SideBarScreen({super.key});
@@ -83,7 +83,7 @@ class SideBarScreen extends StatelessWidget {
                       await FirebaseAuth.instance.signOut();
                       if (context.mounted) {
                         Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (context) => const LoginPage()),
+                          MaterialPageRoute(builder: (context) => const LoginOrRegisterPage()),
                           (Route<dynamic> route) => false,
                         );
                       }

@@ -1,5 +1,5 @@
 import 'package:authentication_api/views/home_screen.dart';
-import 'package:authentication_api/views/log_in.dart';
+import 'package:authentication_api/views/login_or_register.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 // ignore: library_prefixes
@@ -43,7 +43,7 @@ class _BottomNavState extends State<BottomNav> {
     await FirebaseAuth.instance.signOut();
     if (mounted) {
       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => const LoginPage()),
+        MaterialPageRoute(builder: (context) => const LoginOrRegisterPage()),
         (Route<dynamic> route) => false,
       );
     }

@@ -1,7 +1,7 @@
+import 'package:authentication_api/views/login_or_register.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:authentication_api/views/sidebar.dart';
-import 'package:authentication_api/views/log_in.dart';
 // ignore: library_prefixes
 import 'package:authentication_api/screens/home_screen.dart' as CalculatorHomeScreen;
 class HomeNavScreen extends StatelessWidget {
@@ -14,7 +14,7 @@ class HomeNavScreen extends StatelessWidget {
     await FirebaseAuth.instance.signOut();
     if (context.mounted) {
       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => const LoginPage()),
+        MaterialPageRoute(builder: (context) => const LoginOrRegisterPage()),
         (Route<dynamic> route) => false,
       );
     }
@@ -44,7 +44,7 @@ class HomeNavScreen extends StatelessWidget {
                 // Navigate to Calculator app
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const CalculatorHomeScreen.HomeScreen(), // Replace with your Calculator app widget
+                    builder: (context) => const CalculatorHomeScreen.HomeScreen(), 
                   ),
                 );
               },
