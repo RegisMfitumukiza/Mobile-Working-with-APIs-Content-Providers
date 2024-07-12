@@ -1,8 +1,10 @@
+import 'package:authentication_api/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:authentication_api/components/my_button.dart';
 import 'package:authentication_api/components/my_textfield.dart';
 import 'package:authentication_api/views/bottom_nav.dart';
+import 'package:authentication_api/components/square_tile.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
@@ -18,7 +20,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
-  // Sign user in method
+  // Sign user up method
   void signUserUp() async {
     // Show loading circle
     showDialog(
@@ -81,24 +83,6 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  // // Wrong password message popup
-  // void wrongPasswordMessage() {
-  //   showDialog(
-  //     context: context,
-  //     builder: (context) {
-  //       return const AlertDialog(
-  //         backgroundColor: Colors.deepPurple,
-  //         title: Center(
-  //           child: Text(
-  //             'Incorrect Password',
-  //             style: TextStyle(color: Colors.white),
-  //           ),
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -155,25 +139,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   obscureText: true,
                 ),
 
-                const SizedBox(height: 10),
-
-                // Forgot password?
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.end,
-                //     children: [
-                //       Text(
-                //         'Forgot Password?',
-                //         style: TextStyle(color: Colors.grey[600]),
-                //       ),
-                //     ],
-                //   ),
-                // ),
-
                 const SizedBox(height: 25),
 
-                // Sign in button
+                // Sign up button
                 MyButton(
                   text: "Sign Up",
                   onTap: signUserUp,
@@ -208,31 +176,29 @@ class _RegisterPageState extends State<RegisterPage> {
 
                 const SizedBox(height: 50),
 
-                // Google + Apple sign in buttons
+                // Google + Facebook sign in buttons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // Google button
-                    SizedBox(
-                      width: 64,
-                      height: 64,
-                      child: Image.asset('assets/images/google_logo.png'),
+                    SquareTile(
+                      onTap: () => AuthService().signInWithGoogle(),
+                      imagePath: 'assets/images/google_logo.png',
                     ),
 
                     const SizedBox(width: 25),
 
                     // Facebook button
-                    SizedBox(
-                      width: 64,
-                      height: 64,
-                      child: Image.asset('assets/images/facebook_logo.png'),
+                    SquareTile(
+                      onTap: () {},
+                      imagePath: 'assets/images/facebook_logo.png',
                     ),
                   ],
                 ),
 
                 const SizedBox(height: 50),
 
-                // Not a member? register now
+                // Already have an account? Login
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

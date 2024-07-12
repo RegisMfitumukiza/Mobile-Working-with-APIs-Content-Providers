@@ -1,8 +1,10 @@
+import 'package:authentication_api/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:authentication_api/components/my_button.dart';
 import 'package:authentication_api/components/my_textfield.dart';
 import 'package:authentication_api/views/bottom_nav.dart';
+import 'package:authentication_api/components/square_tile.dart';
 
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
@@ -73,24 +75,6 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
   }
-
-  // // Wrong password message popup
-  // void wrongPasswordMessage() {
-  //   showDialog(
-  //     context: context,
-  //     builder: (context) {
-  //       return const AlertDialog(
-  //         backgroundColor: Colors.deepPurple,
-  //         title: Center(
-  //           child: Text(
-  //             'Incorrect Password',
-  //             style: TextStyle(color: Colors.white),
-  //           ),
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -192,24 +176,22 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 50),
 
-                // Google + Apple sign in buttons
+                // Google + Facebook sign in buttons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // Google button
-                    SizedBox(
-                      width: 64,
-                      height: 64,
-                      child: Image.asset('lib/images/google_logo.png'),
+                    SquareTile(
+                      onTap: () => AuthService().signInWithGoogle(),
+                      imagePath: 'assets/images/google_logo.png',
                     ),
 
                     const SizedBox(width: 25),
 
                     // Facebook button
-                    SizedBox(
-                      width: 64,
-                      height: 64,
-                      child: Image.asset('lib/images/facebook_logo.png'),
+                    SquareTile(
+                      onTap: () {},
+                      imagePath: 'assets/images/facebook_logo.png',
                     ),
                   ],
                 ),
