@@ -6,6 +6,38 @@ plugins {
 }
 
 // ... (rest of your existing code) ...
+plugins {
+    id "com.android.application"
+    id 'com.google.gms.google-services'
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterRoot = localProperties.getProperty('flutter.sdk')
+if (flutterRoot == null) {
+    throw new FileNotFoundException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+// ... (rest of your existing code) ...
+
 
 android {
     namespace = "com.example.authentication_api"
@@ -18,15 +50,15 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.authentication_api"
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
-        versionCode = flutterVersionCode.toInteger()
-        versionName = flutterVersionName
-        manifestPlaceholders += [
-            'REVERSED_CLIENT_ID': 'com.googleusercontent.apps.668813979866-hlu7jn63krhhmm8pbcm6er5u8o36cd0t.apps.googleusercontent.com'
-        ]
-    }
+    applicationId = "com.example.authentication_api"
+    minSdkVersion flutter.minSdkVersion
+    targetSdkVersion flutter.targetSdkVersion
+    versionCode flutterVersionCode.toInteger()
+    versionName flutterVersionName
+    manifestPlaceholders += [
+        'REVERSED_CLIENT_ID': 'com.googleusercontent.apps.668813979866-hlu7jn63krhhmm8pbcm6er5u8o36cd0t.apps.googleusercontent.com'
+    ]
+}
 
     // ... (rest of your existing configurations) ...
 }
