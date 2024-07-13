@@ -1,11 +1,14 @@
+import 'package:authentication_api/views/about_us_screen.dart';
+import 'package:authentication_api/views/help_screen.dart'; // Import the HelpScreen
 import 'package:authentication_api/views/login_or_register.dart';
+import 'package:authentication_api/views/setting_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SideBarScreen extends StatelessWidget {
   const SideBarScreen({super.key});
 
-  final List drawerMenuListname = const [
+  final List<Map<String, dynamic>> drawerMenuListname = const [
     {
       "leading": Icon(
         Icons.animation_rounded,
@@ -55,7 +58,8 @@ class SideBarScreen extends StatelessWidget {
               const ListTile(
                 leading: CircleAvatar(
                   backgroundImage: NetworkImage(
-                    "https://www.channelfutures.com/files/2019/10/Focus-877x432.jpg"),
+                    "https://www.channelfutures.com/files/2019/10/Focus-877x432.jpg",
+                  ),
                 ),
                 title: Text(
                   "Regis M",
@@ -79,16 +83,38 @@ class SideBarScreen extends StatelessWidget {
                   title: Text(sideMenuData['title']),
                   trailing: sideMenuData['trailing'],
                   onTap: () async {
-                    if (sideMenuData['action_id'] == 4) {
-                      await FirebaseAuth.instance.signOut();
-                      if (context.mounted) {
-                        Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (context) => const LoginOrRegisterPage()),
-                          (Route<dynamic> route) => false,
+                    switch (sideMenuData['action_id']) {
+                      case 1:
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const AboutUsScreen()),
                         );
-                      }
+                        break;
+                      case 2:
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const HelpScreen()),
+                        );
+                        break;
+                      case 3:
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const SettingScreen()),
+                        );
+                        break;
+                      case 4:
+                        await FirebaseAuth.instance.signOut();
+                        if (context.mounted) {
+                          Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(builder: (context) => const LoginOrRegisterPage()),
+                            (Route<dynamic> route) => false,
+                          );
+                        }
+                        break;
+                      default:
+                        // Handle other actions or do nothing
+                        break;
                     }
-                    // Add more actions here if needed
                   },
                 );
               })

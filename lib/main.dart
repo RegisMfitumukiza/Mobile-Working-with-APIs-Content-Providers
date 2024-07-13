@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:provider/provider.dart';
 import 'package:authentication_api/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:authentication_api/provider/cal_provider.dart';
 import 'package:authentication_api/provider/theme_provider.dart';
 import 'package:authentication_api/views/auth_page.dart';
@@ -28,10 +28,15 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _connectivityService.initConnectivity(context);
-      _batteryService.initBatteryMonitor(context);
-    });
+    _connectivityService.initialize(context);
+    _batteryService.initialize();
+  }
+
+  @override
+  void dispose() {
+    _connectivityService.dispose();
+    _batteryService.dispose();
+    super.dispose();
   }
 
   @override

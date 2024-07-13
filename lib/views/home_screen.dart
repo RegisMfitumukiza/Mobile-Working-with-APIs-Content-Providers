@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:authentication_api/views/sidebar.dart';
 // ignore: library_prefixes
-import 'package:authentication_api/screens/home_screen.dart' as CalculatorHomeScreen;
+import 'package:authentication_api/screens/home_screen.dart' as CalculatorHomeScreen; // Import CalculatorHomeScreen
+
 class HomeNavScreen extends StatelessWidget {
   HomeNavScreen({super.key});
 
@@ -44,12 +45,14 @@ class HomeNavScreen extends StatelessWidget {
                 // Navigate to Calculator app
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const CalculatorHomeScreen.HomeScreen(), 
+                    builder: (context) => const CalculatorHomeScreen.HomeScreen(),
                   ),
                 );
               },
               child: const Text('Go to Calculator'),
             ),
+            // Add space between buttons
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () => signUserOut(context),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
