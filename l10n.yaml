@@ -1,0 +1,6 @@
+arb-dir: lib/localization
+template-arb-file: intl_en.arb
+output-localization-file: lib/generated/l10n.dart
+output-dir: lib/generated
+output-class: S
+output-format: dart

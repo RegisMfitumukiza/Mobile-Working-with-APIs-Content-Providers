@@ -1,0 +1,11 @@
+{
+  "@@locale": "es",
+  "editProfilePicture": "Editar Foto de Perfil",
+  "selectFromGallery": "Seleccionar de la Galería",
+  "takePicture": "Tomar una Foto",
+  "contacts": "Contactos",
+  "aboutUs": "Sobre Nosotros",
+  "help": "Ayuda",
+  "settings": "Configuraciones",
+  "signOut": "Cerrar Sesión"
+}

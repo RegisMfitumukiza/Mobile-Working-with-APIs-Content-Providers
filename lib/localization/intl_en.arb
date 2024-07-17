@@ -1,0 +1,11 @@
+{
+  "@@locale": "en",
+  "editProfilePicture": "Edit Profile Picture",
+  "selectFromGallery": "Select from Gallery",
+  "takePicture": "Take a Picture",
+  "contacts": "Contacts",
+  "aboutUs": "About Us",
+  "help": "Help",
+  "settings": "Settings",
+  "signOut": "Sign Out"
+}
